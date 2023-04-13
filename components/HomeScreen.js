@@ -163,7 +163,11 @@ export default function HomeScreen({ navigation }) {
           </View>
 
           {showSettings && (
-            <View style={{ backgroundColor: "black" }}>yuh</View>
+            <View style={{ alignItems: "center" }}>
+              <View style={styles.sortContainer}>
+                <Text>I am in pain</Text>
+              </View>
+            </View>
           )}
           <FlatList data={data} renderItem={renderItem} scrollEnabled={false} />
         </ScrollView>

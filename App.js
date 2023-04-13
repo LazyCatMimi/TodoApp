@@ -65,6 +65,12 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
+  sortContainer: {
+    backgroundColor: "#33383F",
+    color: "white",
+    width: "60%",
+    borderRadius: 10,
+  },
   // texts
   whiteText: {
     color: "#FFFFFF",
