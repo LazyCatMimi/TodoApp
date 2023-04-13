@@ -70,6 +70,24 @@ export const styles = StyleSheet.create({
     color: "white",
     width: "60%",
     borderRadius: 10,
+    alignItems: "center",
+  },
+  floatingBox: {
+    backgroundColor: "#25282D",
+    padding: 20,
+    borderRadius: 5,
+  },
+  overlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(5,5,10,0.7)",
+    zIndex: 998,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   // texts
   whiteText: {
@@ -128,6 +146,10 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     textAlign: "center",
+  },
+  confirmButton: {
+    paddingHorizontal: 10,
+    borderRadius: 10,
   },
   // new task text input boxes
   input: {

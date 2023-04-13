@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { Button, Input, CheckBox } from "react-native-elements";
 import Constants from "expo-constants";
-import { IoFilter } from "react-icons/io5";
+import { IoFilter, IoTrashOutline } from "react-icons/io5";
 
 import { styles } from "../App";
 
@@ -32,7 +32,7 @@ export default function HomeScreen({ navigation }) {
     {
       title: "description is optional",
       description: "",
-      completed: false,
+      completed: true,
       key: "t3",
     },
   ];
@@ -41,6 +41,7 @@ export default function HomeScreen({ navigation }) {
   let [taskName, setTaskName] = useState("");
   let [taskDesc, setTaskDesc] = useState("");
   let [showSettings, setShowSettings] = useState(false);
+  let [showConfirmation, setShowConfirmation] = useState(true);
 
   const addNewTask = () => {
     if (taskName.length > 0) {
@@ -106,6 +107,37 @@ export default function HomeScreen({ navigation }) {
   };
   return (
     <>
+      {showConfirmation && (
+        <View style={styles.overlay}>
+          <View style={styles.floatingBox}>
+            <Text style={styles.sectionTitle}>Delete all completed Tasks?</Text>
+
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 30,
+              }}
+            >
+              <TouchableOpacity
+                onPress={() => setShowConfirmation(false)}
+                style={[styles.confirmButton, { backgroundColor: "black" }]}
+              >
+                <Text style={styles.whiteText}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setData(data.filter((task) => !task.completed));
+                  setShowConfirmation(false);
+                }}
+                style={[styles.confirmButton, { backgroundColor: "#28B985" }]}
+              >
+                <Text style={styles.whiteText}>Confirm</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      )}
       <SafeAreaView style={[styles.container, { flex: 1 }]}>
         {/* user info top bar */}
         <View style={[styles.topBar, styles.greeting]}>
@@ -162,10 +194,18 @@ export default function HomeScreen({ navigation }) {
             </TouchableOpacity>
           </View>
 
+          {/* settings box for sorting and deleting */}
           {showSettings && (
             <View style={{ alignItems: "center" }}>
               <View style={styles.sortContainer}>
-                <Text>I am in pain</Text>
+                {/* button to delete completed tasks */}
+                <TouchableOpacity
+                  style={{ flexDirection: "row", alignItems: "center" }}
+                  onPress={() => setShowConfirmation(true)}
+                >
+                  <IoTrashOutline size={20} />
+                  <Text style={styles.whiteText}>Delete Completed Tasks</Text>
+                </TouchableOpacity>
               </View>
             </View>
           )}
