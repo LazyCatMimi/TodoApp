@@ -148,7 +148,8 @@ export const styles = StyleSheet.create({
     textAlign: "center",
   },
   confirmButton: {
-    paddingHorizontal: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     borderRadius: 10,
   },
   // new task text input boxes
