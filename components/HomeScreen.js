@@ -3,7 +3,6 @@ import { useState } from "react";
 import {
   Text,
   View,
-  StyleSheet,
   SafeAreaView,
   TouchableOpacity,
   FlatList,
@@ -12,28 +11,40 @@ import {
 import { Button, Input, CheckBox } from "react-native-elements";
 import Constants from "expo-constants";
 import { IoFilter, IoTrashOutline } from "react-icons/io5";
-
+import RadioGroup from "react-native-radio-buttons-group";
 import { styles } from "../App";
 
 export default function HomeScreen({ navigation }) {
   let initData = [
     {
-      title: "Log in",
+      title: "1. Log in",
       description: "made an account and logged in",
       completed: true,
       key: "t1",
     },
     {
-      title: "Get Started",
+      title: "2. Get Started",
       description: "begin your task-managing journey",
       completed: false,
       key: "t2",
     },
     {
-      title: "description is optional",
+      title: "3. description is optional",
       description: "",
       completed: true,
       key: "t3",
+    },
+  ];
+  const radioButtonsData = [
+    {
+      id: "1",
+      label: "Apple",
+      value: "apple",
+    },
+    {
+      id: "2",
+      label: "Samsung",
+      value: "samsung",
     },
   ];
   let [data, setData] = useState(initData);
@@ -41,7 +52,8 @@ export default function HomeScreen({ navigation }) {
   let [taskName, setTaskName] = useState("");
   let [taskDesc, setTaskDesc] = useState("");
   let [showSettings, setShowSettings] = useState(false);
-  let [showConfirmation, setShowConfirmation] = useState(true);
+  let [showConfirmation, setShowConfirmation] = useState(false);
+  let [sortType, setSortType] = useState("aDesc");
 
   const addNewTask = () => {
     if (taskName.length > 0) {
@@ -121,7 +133,7 @@ export default function HomeScreen({ navigation }) {
             >
               <TouchableOpacity
                 onPress={() => setShowConfirmation(false)}
-                style={[styles.confirmButton, { backgroundColor: "black" }]}
+                style={[styles.confirmButton, { backgroundColor: "#25282D" }]}
               >
                 <Text style={styles.whiteText}>Cancel</Text>
               </TouchableOpacity>
@@ -132,7 +144,7 @@ export default function HomeScreen({ navigation }) {
                 }}
                 style={[styles.confirmButton, { backgroundColor: "#28B985" }]}
               >
-                <Text style={styles.whiteText}>Confirm</Text>
+                <Text>Confirm</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -198,6 +210,11 @@ export default function HomeScreen({ navigation }) {
           {showSettings && (
             <View style={{ alignItems: "center" }}>
               <View style={styles.sortContainer}>
+                {/* radio button for the sorting options */}
+                <RadioGroup
+                  radioButtons={radioButtonsData} //pass in our array
+                  onPress={(value) => setValue(value)}
+                />
                 {/* button to delete completed tasks */}
                 <TouchableOpacity
                   style={{ flexDirection: "row", alignItems: "center" }}
