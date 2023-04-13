@@ -14,7 +14,7 @@ import {
 // import self created stuff
 import { styles } from "../App";
 
-export default function NewTask(props) {
+export default function TaskScreen(props) {
   let [taskName, setTaskName] = useState("");
   let [taskDesc, setTaskDesc] = useState("");
 
