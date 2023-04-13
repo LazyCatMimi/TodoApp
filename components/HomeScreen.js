@@ -40,6 +40,7 @@ export default function HomeScreen({ navigation }) {
 
   let [taskName, setTaskName] = useState("");
   let [taskDesc, setTaskDesc] = useState("");
+  let [showSettings, setShowSettings] = useState(false);
 
   const addNewTask = () => {
     if (taskName.length > 0) {
@@ -147,7 +148,23 @@ export default function HomeScreen({ navigation }) {
           </TouchableOpacity>
 
           {/* ------------list of tasks --------*/}
-          <Text style={styles.sectionTitle}>Tasks</Text>
+          <View style={styles.taskFilterContainer}>
+            <Text style={styles.sectionTitle}>Tasks</Text>
+            <TouchableOpacity
+              onPress={() => setShowSettings(!showSettings)}
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <IoFilter size={30} />
+              <Text style={{ color: "white", fontWeight: "bold" }}>Sort</Text>
+            </TouchableOpacity>
+          </View>
+
+          {showSettings && (
+            <View style={{ backgroundColor: "black" }}>yuh</View>
+          )}
           <FlatList data={data} renderItem={renderItem} scrollEnabled={false} />
         </ScrollView>
         <TouchableOpacity

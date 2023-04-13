@@ -60,6 +60,11 @@ export const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: mainPAD,
   },
+  taskFilterContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
   // texts
   whiteText: {
     color: "#FFFFFF",
