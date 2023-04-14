@@ -162,6 +162,7 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 10,
     borderRadius: 10,
+    border: "none",
   },
   form: {
     flexDirection: "row",
