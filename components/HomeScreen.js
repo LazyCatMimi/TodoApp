@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { Input, CheckBox } from "react-native-elements";
 
-import { IoFilter, IoTrashOutline } from "react-icons/io5";
+import { IoFilter, IoTrashOutline, IoAddOutline } from "react-icons/io5";
 
 import RadioForm from "react-native-simple-radio-button";
 import { styles } from "../App";
@@ -277,7 +277,8 @@ export default function HomeScreen({ navigation }) {
             })
           }
         >
-          <Text style={[styles.whiteText, styles.btnText]}>Create</Text>
+          <IoAddOutline size={30} />
+          <Text style={[styles.whiteText, styles.btnText]}>New Task</Text>
         </TouchableOpacity>
       </SafeAreaView>
     </>

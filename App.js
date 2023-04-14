@@ -136,9 +136,11 @@ export const styles = StyleSheet.create({
     border: 0,
     padding: 10,
     borderRadius: 50,
-    textAlign: "center",
     marginTop: 20,
     marginBottom: 45,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
   },
   backBtn: {
     zIndex: 2,

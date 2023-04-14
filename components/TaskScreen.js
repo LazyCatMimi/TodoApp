@@ -1,5 +1,5 @@
 // this file will be used later
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   CheckBox,
   Text,
@@ -13,12 +13,14 @@ import {
 // import self created stuff
 import { styles } from "../App";
 import { Input } from "react-native-elements";
+import { IoIosArrowBack } from "react-icons/io";
 
 export default function TaskScreen({ route, navigation }) {
   const { setData, data, itemInfo, type } = route.params;
   let [taskName, setTaskName] = useState("");
   let [taskDesc, setTaskDesc] = useState("");
   let [taskDate, setTaskDate] = useState("");
+  let [disableSubmit, setDisableSubmit] = useState(true);
   let [err, setErr] = useState("");
 
   const addNewTask = () => {
@@ -45,18 +47,27 @@ export default function TaskScreen({ route, navigation }) {
       setErr(`${taskDate} is not a valid date.`);
     } else {
       setErr("");
+      setDisableSubmit(false);
     }
   };
+
+  useEffect(() => {
+    if (!err && taskName.length > 0) {
+      setDisableSubmit(false);
+    } else {
+      setDisableSubmit(true);
+    }
+  }, [err, taskName]);
   return (
     <View style={[styles.container, { flex: 1 }]}>
       {/* top bar */}
       <View style={[styles.col2, styles.topBar, { alignItems: "stretch" }]}>
-        {/* back button to return to MAIN */}
+        {/* back button to return to HOME */}
         <TouchableOpacity
           style={styles.backBtn}
           onPress={() => navigation.navigate("Home")}
         >
-          <Text>Why</Text>
+          <IoIosArrowBack size={30} />
         </TouchableOpacity>
         {/* section title */}
         <Text style={[styles.sectionTitle, { textAlign: "center", flex: 1 }]}>
@@ -97,16 +108,14 @@ export default function TaskScreen({ route, navigation }) {
           placeholderTextColor="#767983"
           onChangeText={(value) => setTaskDate(value)}
           onBlur={validateDate}
+          onFocus={() => setDisableSubmit(true)}
           errorMessage={err}
         />
         {/* submit button, only enables if task name contains something */}
         <TouchableOpacity
-          style={[
-            styles.newTaskBtn,
-            taskName.length == 0 ? { opacity: "20%" } : "",
-          ]}
+          style={[styles.newTaskBtn, disableSubmit ? { opacity: "20%" } : ""]}
           onPress={addNewTask}
-          disabled={taskName.length == 0 ? true : false}
+          disabled={disableSubmit}
         >
           <Text style={[styles.whiteText, styles.btnText]}>Create</Text>
         </TouchableOpacity>
