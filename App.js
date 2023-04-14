@@ -66,6 +66,8 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   sortContainer: {
+    padding: 20,
+    marginBottom: 20,
     backgroundColor: "#33383F",
     color: "white",
     width: "60%",
