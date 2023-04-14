@@ -9,11 +9,11 @@ import {
   ScrollView,
 } from "react-native";
 import { Input, CheckBox } from "react-native-elements";
+import RadioForm from "react-native-simple-radio-button";
 
 import { IoFilter, IoTrashOutline, IoAddOutline } from "react-icons/io5";
-
-import RadioForm from "react-native-simple-radio-button";
 import { styles } from "../App";
+import PopUp from "./popUpBox";
 
 export default function HomeScreen({ navigation }) {
   let initData = [
@@ -173,36 +173,14 @@ export default function HomeScreen({ navigation }) {
   };
   return (
     <>
+      {/* pop up to confirm delete all */}
       {showConfirmation && (
-        <View style={styles.overlay}>
-          <View style={styles.floatingBox}>
-            <Text style={styles.sectionTitle}>Delete all completed Tasks?</Text>
-
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 30,
-              }}
-            >
-              <TouchableOpacity
-                onPress={() => setShowConfirmation(false)}
-                style={[styles.confirmButton, { backgroundColor: "#25282D" }]}
-              >
-                <Text style={styles.whiteText}>Cancel</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  setData(data.filter((task) => !task.completed));
-                  setShowConfirmation(false);
-                }}
-                style={[styles.confirmButton, { backgroundColor: "#D86B6B" }]}
-              >
-                <Text>Confirm</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
+        <PopUp
+          actionFunction={() => setData(data.filter((task) => !task.completed))}
+          setShowConfirmation={setShowConfirmation}
+          message="Delete all completed tasks?"
+          confirmButtonColor="#D86B6B"
+        />
       )}
       <SafeAreaView style={[styles.container, { flex: 1 }]}>
         {/* user info top bar */}
@@ -266,20 +244,22 @@ export default function HomeScreen({ navigation }) {
           )}
           <FlatList data={data} renderItem={renderItem} scrollEnabled={false} />
         </ScrollView>
-        <TouchableOpacity
-          style={[styles.newTaskBtn]}
-          onPress={() =>
-            navigation.navigate("Task", {
-              setData,
-              data,
-              itemInfo: {},
-              type: "NEW",
-            })
-          }
-        >
-          <IoAddOutline size={30} />
-          <Text style={[styles.whiteText, styles.btnText]}>New Task</Text>
-        </TouchableOpacity>
+        <View style={{ alignItems: "center" }}>
+          <TouchableOpacity
+            style={[styles.newTaskBtn]}
+            onPress={() =>
+              navigation.navigate("Task", {
+                setData,
+                data,
+                itemInfo: {},
+                type: "NEW",
+              })
+            }
+          >
+            <IoAddOutline size={30} />
+            <Text style={[styles.whiteText, styles.btnText]}>New Task</Text>
+          </TouchableOpacity>
+        </View>
       </SafeAreaView>
     </>
   );

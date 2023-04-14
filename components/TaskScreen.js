@@ -111,14 +111,16 @@ export default function TaskScreen({ route, navigation }) {
           onFocus={() => setDisableSubmit(true)}
           errorMessage={err}
         />
-        {/* submit button, only enables if task name contains something */}
-        <TouchableOpacity
-          style={[styles.newTaskBtn, disableSubmit ? { opacity: "20%" } : ""]}
-          onPress={addNewTask}
-          disabled={disableSubmit}
-        >
-          <Text style={[styles.whiteText, styles.btnText]}>Create</Text>
-        </TouchableOpacity>
+        {/* submit button, only enables if task name contains something && date is valid */}
+        <View style={{ alignItems: "center" }}>
+          <TouchableOpacity
+            style={[styles.newTaskBtn, disableSubmit ? { opacity: "20%" } : ""]}
+            onPress={addNewTask}
+            disabled={disableSubmit}
+          >
+            <Text style={[styles.whiteText, styles.btnText]}>Create</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

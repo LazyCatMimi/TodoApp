@@ -9,6 +9,7 @@ import HomeScreen from "./components/HomeScreen";
 import LoginScreen from "./components/LoginScreen";
 import RegisterScreen from "./components/RegisterScreen";
 import TaskScreen from "./components/TaskScreen";
+import PopUp from "./components/popUpBox";
 
 const Stack = createNativeStackNavigator();
 
@@ -137,10 +138,12 @@ export const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 50,
     marginTop: 20,
-    marginBottom: 45,
+    marginBottom: 20,
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
+    width: "75%",
+    zIndex: 2,
   },
   backBtn: {
     zIndex: 2,
