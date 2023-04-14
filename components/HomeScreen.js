@@ -58,8 +58,6 @@ export default function HomeScreen({ navigation }) {
     },
   ];
   let [data, setData] = useState(initData);
-  let [taskName, setTaskName] = useState("");
-  let [taskDesc, setTaskDesc] = useState("");
   let [showSettings, setShowSettings] = useState(false);
   let [showConfirmation, setShowConfirmation] = useState(false);
   let [sortType, setSortType] = useState("aAsc");
@@ -216,37 +214,6 @@ export default function HomeScreen({ navigation }) {
         </View>
 
         <ScrollView style={styles.mainArea}>
-          {/* ---------form to create new task---------- */}
-          <Text
-            style={[
-              styles.sectionTitle,
-              { textAlign: "center", color: "white", marginBottom: 5 },
-            ]}
-          >
-            Create a New Task
-          </Text>
-
-          <Input
-            placeholder="Task Name"
-            style={styles.whiteText}
-            onChangeText={(value) => setTaskName(value)}
-          ></Input>
-          <Input
-            placeholder="Task Description... (optional)"
-            style={styles.whiteText}
-            onChangeText={(value) => setTaskDesc(value)}
-          ></Input>
-          <TouchableOpacity
-            style={[
-              styles.newTaskBtn,
-              taskName.length == 0 ? { opacity: 0.2 } : { opacity: 1 },
-            ]}
-            onPress={addNewTask}
-            disabled={taskName.length == 0 ? true : false}
-          >
-            <Text style={[styles.whiteText, styles.btnText]}>Create</Text>
-          </TouchableOpacity>
-
           {/* ------------list of tasks --------*/}
           <View style={styles.taskFilterContainer}>
             <Text style={styles.sectionTitle}>Tasks</Text>
@@ -301,7 +268,9 @@ export default function HomeScreen({ navigation }) {
         </ScrollView>
         <TouchableOpacity
           style={[styles.newTaskBtn]}
-          onPress={() => navigation.navigate("Task")}
+          onPress={() =>
+            navigation.navigate("Task", { setData, data, itemInfo: {} })
+          }
         >
           <Text style={[styles.whiteText, styles.btnText]}>Create</Text>
         </TouchableOpacity>

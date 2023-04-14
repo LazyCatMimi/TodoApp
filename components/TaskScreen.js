@@ -14,7 +14,8 @@ import {
 // import self created stuff
 import { styles } from "../App";
 
-export default function TaskScreen(props) {
+export default function TaskScreen({ route, navigation }) {
+  const { setData, data, itemInfo } = route.params;
   let [taskName, setTaskName] = useState("");
   let [taskDesc, setTaskDesc] = useState("");
 
@@ -23,12 +24,13 @@ export default function TaskScreen(props) {
       const newTask = {
         title: taskName,
         description: taskDesc,
+        date: "",
         completed: false,
-        key: `t${props.data.length + 1}`,
+        key: `t${data.length + 1}`,
       };
-      props.setData([...props.data, newTask]);
+      setData([...data, newTask]);
     }
-    props.setCurScreen("MAIN");
+    navigation.navigate("Home");
   };
 
   return (
