@@ -62,7 +62,7 @@ export default function HomeScreen({ navigation }) {
   let [taskDesc, setTaskDesc] = useState("");
   let [showSettings, setShowSettings] = useState(false);
   let [showConfirmation, setShowConfirmation] = useState(false);
-  let [sortType, setSortType] = useState("aDesc");
+  let [sortType, setSortType] = useState("aAsc");
 
   const addNewTask = () => {
     if (taskName.length > 0) {
@@ -198,7 +198,7 @@ export default function HomeScreen({ navigation }) {
                   setData(data.filter((task) => !task.completed));
                   setShowConfirmation(false);
                 }}
-                style={[styles.confirmButton, { backgroundColor: "#28B985" }]}
+                style={[styles.confirmButton, { backgroundColor: "#D86B6B" }]}
               >
                 <Text>Confirm</Text>
               </TouchableOpacity>
@@ -281,23 +281,30 @@ export default function HomeScreen({ navigation }) {
                 />
                 {/* button to delete completed tasks */}
                 <TouchableOpacity
-                  style={{ flexDirection: "row", alignItems: "center" }}
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginTop: 20,
+                    color: "#D86B6B",
+                  }}
                   onPress={() => setShowConfirmation(true)}
                 >
                   <IoTrashOutline size={20} />
-                  <Text style={styles.whiteText}>Delete Completed Tasks</Text>
+                  <Text style={{ color: "#D86B6B" }}>
+                    Delete Completed Tasks
+                  </Text>
                 </TouchableOpacity>
               </View>
             </View>
           )}
           <FlatList data={data} renderItem={renderItem} scrollEnabled={false} />
         </ScrollView>
-        {/* <TouchableOpacity
+        <TouchableOpacity
           style={[styles.newTaskBtn]}
           onPress={() => navigation.navigate("Task")}
         >
           <Text style={[styles.whiteText, styles.btnText]}>Create</Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
       </SafeAreaView>
     </>
   );

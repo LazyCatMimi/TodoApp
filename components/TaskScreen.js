@@ -32,18 +32,12 @@ export default function TaskScreen(props) {
   };
 
   return (
-    <>
+    <View style={[styles.container, { flex: 1 }]}>
       {/* top bar */}
       <View style={[styles.col2, styles.topBar, { alignItems: "stretch" }]}>
         {/* back button to return to MAIN */}
-        <TouchableOpacity
-          style={styles.backBtn}
-          onPress={() => props.setCurScreen("MAIN")}
-        >
-          <Image
-            style={styles.icon}
-            source={require("../assets/arrow-left.png")}
-          />
+        <TouchableOpacity style={styles.backBtn}>
+          <Text>Why</Text>
         </TouchableOpacity>
         {/* section title */}
         <Text style={[styles.sectionTitle, { textAlign: "center", flex: 1 }]}>
@@ -84,6 +78,6 @@ export default function TaskScreen(props) {
           <Text style={[styles.whiteText, styles.btnText]}>Create</Text>
         </TouchableOpacity>
       </View>
-    </>
+    </View>
   );
 }
