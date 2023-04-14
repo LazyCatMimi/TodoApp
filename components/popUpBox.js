@@ -7,7 +7,9 @@ export default function PopUp(props) {
   return (
     <View style={styles.overlay}>
       <View style={styles.floatingBox}>
-        <Text style={styles.sectionTitle}>{message}</Text>
+        <Text style={[styles.sectionTitle, { textAlign: "center" }]}>
+          {message}
+        </Text>
 
         <View
           style={{
@@ -18,7 +20,10 @@ export default function PopUp(props) {
         >
           <TouchableOpacity
             onPress={() => setShowConfirmation(false)}
-            style={[styles.confirmButton, { backgroundColor: "#25282D" }]}
+            style={[
+              styles.confirmButton,
+              { backgroundColor: "#33383F", marginRight: 20 },
+            ]}
           >
             <Text style={styles.whiteText}>Cancel</Text>
           </TouchableOpacity>
@@ -29,7 +34,7 @@ export default function PopUp(props) {
             }}
             style={[
               styles.confirmButton,
-              { backgroundColor: confirmButtonColor },
+              { backgroundColor: confirmButtonColor, marginLeft: 20 },
             ]}
           >
             <Text>Confirm</Text>

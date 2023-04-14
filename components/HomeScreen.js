@@ -49,11 +49,11 @@ export default function HomeScreen({ navigation }) {
       value: "aDesc",
     },
     {
-      label: "Date↑",
+      label: "Deadline↑",
       value: "dateAsc",
     },
     {
-      label: "Date↓",
+      label: "Deadline↓",
       value: "dateDesc",
     },
   ];
@@ -154,13 +154,23 @@ export default function HomeScreen({ navigation }) {
             {
               // render description only if item has it
               item.description.length > 0 && (
-                <Text style={item.completed ? styles.crossText : undefined}>
+                <Text
+                  style={[
+                    item.completed && styles.crossText,
+                    { color: "#676477" },
+                  ]}
+                >
                   {item.description}
                 </Text>
               )
             }
             {item.date.length > 0 && (
-              <Text style={item.completed ? styles.crossText : undefined}>
+              <Text
+                style={[
+                  item.completed && styles.crossText,
+                  { color: "#676477" },
+                ]}
+              >
                 {item.date}
               </Text>
             )}
@@ -177,7 +187,7 @@ export default function HomeScreen({ navigation }) {
             })
           }
         >
-          <FiEdit3 size={25} />
+          <FiEdit3 size={25} color="#676477" />
         </TouchableOpacity>
       </View>
     );
@@ -257,7 +267,7 @@ export default function HomeScreen({ navigation }) {
         </ScrollView>
         <View style={{ alignItems: "center" }}>
           <TouchableOpacity
-            style={[styles.newTaskBtn]}
+            style={[styles.newTaskBtn, styles.actionBtn]}
             onPress={() =>
               navigation.navigate("Task", {
                 setData,

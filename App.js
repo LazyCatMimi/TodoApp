@@ -122,6 +122,7 @@ export const styles = StyleSheet.create({
   },
   col2: {
     flexDirection: "row",
+    alignItems: "center",
   },
   itemTitle: {
     fontSize: 23,
@@ -134,16 +135,17 @@ export const styles = StyleSheet.create({
   // buttons
   newTaskBtn: {
     backgroundColor: "#28B985",
-    border: 0,
-    padding: 10,
-    borderRadius: 50,
     marginTop: 20,
     marginBottom: 20,
+    zIndex: 2,
+  },
+  actionBtn: {
+    padding: 10,
+    borderRadius: 50,
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
     width: "75%",
-    zIndex: 2,
   },
   backBtn: {
     zIndex: 2,
