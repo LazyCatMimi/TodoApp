@@ -11,9 +11,10 @@ import {
 import { Input, CheckBox } from "react-native-elements";
 import RadioForm from "react-native-simple-radio-button";
 import { IoFilter, IoTrashOutline, IoAddOutline } from "react-icons/io5";
-import { FiEdit3 } from "react-icons/fi";
+import { FiEdit3, FiLogOut } from "react-icons/fi";
 import { styles } from "../App";
 import PopUp from "./popUpBox";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function HomeScreen({ navigation }) {
   let initData = [
@@ -57,22 +58,25 @@ export default function HomeScreen({ navigation }) {
       value: "dateDesc",
     },
   ];
+
   let [data, setData] = useState(initData);
   let [showSettings, setShowSettings] = useState(false);
   let [showConfirmation, setShowConfirmation] = useState(false);
   let [sortType, setSortType] = useState("aAsc");
-
-  const addNewTask = () => {
-    if (taskName.length > 0) {
-      const newTask = {
-        title: taskName,
-        description: taskDesc,
-        completed: false,
-        key: `t${data.length + 1}`,
-      };
-      setData([newTask, ...data]);
+  let userData;
+  useEffect(() => {
+    async function getData() {
+      let data;
+      data = await AsyncStorage.getItem("@user");
+      if (data != null) {
+        return JSON.parse(data);
+      } else {
+        console.log("no user data");
+        return null;
+      }
     }
-  };
+    userData = getData();
+  }, []);
 
   // function to sort
   useEffect(() => {
@@ -206,9 +210,14 @@ export default function HomeScreen({ navigation }) {
       <SafeAreaView style={[styles.container, { flex: 1 }]}>
         {/* user info top bar */}
         <View style={[styles.topBar, styles.greeting]}>
-          <Text style={styles.whiteText}>Hello, UserName</Text>
+          <Text style={styles.whiteText}>
+            Hello,{" "}
+            {userData != null
+              ? `${userData.firstName} ${userData.lastName}`
+              : "Multitasker"}
+          </Text>
           <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-            <Text style={styles.whiteText}>logout</Text>
+            <FiLogOut size={22} />
           </TouchableOpacity>
         </View>
 

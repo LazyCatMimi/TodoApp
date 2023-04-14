@@ -178,6 +178,7 @@ export default function RegisterScreen({ navigation }) {
         <Input
           label="Phone Number"
           testID="phonenumber"
+          placeholder="(xxx) xxx-xxxx"
           inputContainerStyle={loginStyles.field}
           onChangeText={(value) => {
             setPhoneNumber(value);

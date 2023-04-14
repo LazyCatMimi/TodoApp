@@ -17,7 +17,7 @@ export default function LoginScreen({ navigation }) {
       if (data != null) {
         setUser(JSON.parse(data));
       } else {
-        console.log("no data");
+        console.log("no user data");
       }
     }
     getData();
@@ -33,7 +33,7 @@ export default function LoginScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { flex: 1 }]}>
       <View
         style={{
           justifyContent: "center",
@@ -66,6 +66,7 @@ export default function LoginScreen({ navigation }) {
           secureTextEntry={true}
           inputContainerStyle={loginStyles.field}
         ></Input>
+        <Text>{err}</Text>
         <TouchableOpacity
           style={loginStyles.button}
           testID="login-button"
@@ -74,7 +75,7 @@ export default function LoginScreen({ navigation }) {
         >
           <Text style={[styles.whiteText, { width: "4em" }]}>login</Text>
         </TouchableOpacity>
-        <Text>{err}</Text>
+
         <Text
           onPress={() => navigation.navigate("Register")}
           style={{ fontWeight: "bold" }}

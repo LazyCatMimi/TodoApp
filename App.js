@@ -9,7 +9,6 @@ import HomeScreen from "./components/HomeScreen";
 import LoginScreen from "./components/LoginScreen";
 import RegisterScreen from "./components/RegisterScreen";
 import TaskScreen from "./components/TaskScreen";
-import PopUp from "./components/popUpBox";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +16,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="Login"
         screenOptions={{
           headerShown: false,
         }}

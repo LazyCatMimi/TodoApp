@@ -39,20 +39,33 @@ export default function TaskScreen({ route, navigation }) {
   };
 
   const addNewTask = () => {
-    if (taskName.length > 0) {
-      const newTask = {
-        title: taskName,
-        description: taskDesc,
-        date: taskDate,
-        completed: false,
-        key: generateKey(),
-      };
-      setData([...data, newTask]);
-    }
+    const newTask = {
+      title: taskName,
+      description: taskDesc,
+      date: taskDate,
+      completed: false,
+      key: generateKey(),
+    };
+    setData([...data, newTask]);
+
     navigation.navigate("Home");
   };
   const removeTask = () => {
     const updatedData = data.filter((item) => item.key !== itemInfo.key);
+    setData(updatedData);
+    navigation.navigate("Home");
+  };
+  const updateTask = () => {
+    const index = data.findIndex((item) => item.key === itemInfo.key);
+    const updatedTask = {
+      title: taskName,
+      description: taskDesc,
+      date: taskDate,
+      completed: itemInfo.completed,
+      key: itemInfo.key,
+    };
+    const updatedData = [...data];
+    updatedData[index] = { ...updatedData[index], ...updatedTask };
     setData(updatedData);
     navigation.navigate("Home");
   };
@@ -155,7 +168,7 @@ export default function TaskScreen({ route, navigation }) {
                   backgroundColor: "#28B985",
                 },
               ]}
-              onPress={addNewTask}
+              onPress={type === "NEW" ? addNewTask : updateTask}
               disabled={disableSubmit}
             >
               <Text style={[styles.whiteText, styles.btnText]}>
