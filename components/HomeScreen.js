@@ -10,8 +10,8 @@ import {
 } from "react-native";
 import { Input, CheckBox } from "react-native-elements";
 import RadioForm from "react-native-simple-radio-button";
-
 import { IoFilter, IoTrashOutline, IoAddOutline } from "react-icons/io5";
+import { FiEdit3 } from "react-icons/fi";
 import { styles } from "../App";
 import PopUp from "./popUpBox";
 
@@ -20,14 +20,14 @@ export default function HomeScreen({ navigation }) {
     {
       title: "1. Log in",
       description: "made an account and logged in",
-      date: "4/11/23",
+      date: "04/11/23",
       completed: true,
       key: "t1",
     },
     {
       title: "2. Get Started",
       description: "begin your task-managing journey",
-      date: "4/12/23",
+      date: "04/12/23",
       completed: false,
       key: "t2",
     },
@@ -167,7 +167,18 @@ export default function HomeScreen({ navigation }) {
           </View>
         </View>
         {/* task options */}
-        <Text>...</Text>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("Task", {
+              setData,
+              data,
+              itemInfo: item,
+              type: "EDIT",
+            })
+          }
+        >
+          <FiEdit3 size={25} />
+        </TouchableOpacity>
       </View>
     );
   };

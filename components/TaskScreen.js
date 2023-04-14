@@ -17,9 +17,11 @@ import { IoIosArrowBack } from "react-icons/io";
 
 export default function TaskScreen({ route, navigation }) {
   const { setData, data, itemInfo, type } = route.params;
-  let [taskName, setTaskName] = useState("");
-  let [taskDesc, setTaskDesc] = useState("");
-  let [taskDate, setTaskDate] = useState("");
+  let [taskName, setTaskName] = useState(type === "EDIT" ? itemInfo.title : "");
+  let [taskDesc, setTaskDesc] = useState(
+    type === "EDIT" ? itemInfo.description : ""
+  );
+  let [taskDate, setTaskDate] = useState(type === "EDIT" ? itemInfo.date : "");
   let [disableSubmit, setDisableSubmit] = useState(true);
   let [err, setErr] = useState("");
 
@@ -80,6 +82,7 @@ export default function TaskScreen({ route, navigation }) {
         {/* task name */}
         <Input
           label="Task Name*"
+          value={taskName}
           inputContainerStyle={[styles.input, styles.whiteText]}
           inputStyle={{ color: "white" }}
           onChangeText={(value) => setTaskName(value)}
@@ -87,6 +90,7 @@ export default function TaskScreen({ route, navigation }) {
         {/* task description */}
         <Input
           label="Task Description"
+          value={taskDesc}
           inputContainerStyle={[
             styles.input,
             styles.whiteText,
@@ -102,6 +106,7 @@ export default function TaskScreen({ route, navigation }) {
         {/* task deadline */}
         <Input
           label="Task Deadline"
+          value={taskDate}
           inputContainerStyle={[styles.input, styles.whiteText]}
           inputStyle={{ color: "white" }}
           placeholder="mm/dd/yy"
@@ -118,8 +123,11 @@ export default function TaskScreen({ route, navigation }) {
             onPress={addNewTask}
             disabled={disableSubmit}
           >
-            <Text style={[styles.whiteText, styles.btnText]}>Create</Text>
+            <Text style={[styles.whiteText, styles.btnText]}>
+              {type === "NEW" ? "Create" : "Save"}
+            </Text>
           </TouchableOpacity>
+          {}
         </View>
       </View>
     </View>
