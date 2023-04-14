@@ -8,10 +8,10 @@ import {
   FlatList,
   ScrollView,
 } from "react-native";
-import { Button, Input, CheckBox } from "react-native-elements";
-import Constants from "expo-constants";
+import { Input, CheckBox } from "react-native-elements";
+
 import { IoFilter, IoTrashOutline } from "react-icons/io5";
-import RadioGroup from "react-native-radio-buttons-group";
+
 import RadioForm from "react-native-simple-radio-button";
 import { styles } from "../App";
 
@@ -88,10 +88,28 @@ export default function HomeScreen({ navigation }) {
         sortedData = copy.sort((a, b) => a.title.localeCompare(b.title));
         break;
       case "dateDesc":
-        sortedData = copy.sort((a, b) => new Date(b.date) - new Date(a.date));
+        sortedData = copy.sort((a, b) => {
+          // put empty dates below non-empty dates
+          if (a.date === "") {
+            return 1;
+          }
+          if (b.date === "") {
+            return -1;
+          }
+          return new Date(b.date) - new Date(a.date);
+        });
         break;
       case "dateAsc":
-        sortedData = copy.sort((a, b) => new Date(a.date) - new Date(b.date));
+        sortedData = copy.sort((a, b) => {
+          // put empty dates below non-empty dates
+          if (a.date === "") {
+            return 1;
+          }
+          if (b.date === "") {
+            return -1;
+          }
+          return new Date(a.date) - new Date(b.date);
+        });
         break;
       default:
         sortedData = data;
@@ -117,7 +135,8 @@ export default function HomeScreen({ navigation }) {
           {/* checkbox */}
           <CheckBox
             checked={item.completed}
-            style={[{ padding: 0, margin: 0, marginRight: 30 }]}
+            style={{ marginRight: 30 }}
+            containerStyle={{ padding: 0, margin: 0 }}
             onPress={() => {
               let newData = [...data];
               newData[newData.indexOf(item)].completed = !item.completed;
@@ -142,6 +161,11 @@ export default function HomeScreen({ navigation }) {
                 </Text>
               )
             }
+            {item.date.length > 0 && (
+              <Text style={item.completed ? styles.crossText : undefined}>
+                {item.date}
+              </Text>
+            )}
           </View>
         </View>
         {/* task options */}
