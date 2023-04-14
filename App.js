@@ -161,6 +161,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#33383F",
     marginBottom: 20,
     marginTop: 10,
+    borderRadius: 10,
   },
   form: {
     flexDirection: "row",

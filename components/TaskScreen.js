@@ -15,9 +15,10 @@ import {
 import { styles } from "../App";
 
 export default function TaskScreen({ route, navigation }) {
-  const { setData, data, itemInfo } = route.params;
+  const { setData, data, itemInfo, type } = route.params;
   let [taskName, setTaskName] = useState("");
   let [taskDesc, setTaskDesc] = useState("");
+  let [taskDate, setTaskDate] = useState("");
 
   const addNewTask = () => {
     if (taskName.length > 0) {
@@ -67,7 +68,13 @@ export default function TaskScreen({ route, navigation }) {
           multiline
           onChangeText={(value) => setTaskDesc(value)}
         />
-
+        <Text style={styles.whiteText}>Task Deadline</Text>
+        <TextInput
+          style={[styles.input, styles.whiteText]}
+          placeholder="mm/dd/yy"
+          placeholderTextColor="#767983"
+          onChangeText={(value) => setTaskDate(value)}
+        />
         {/* submit button, only enables if task name contains something */}
         <TouchableOpacity
           style={[

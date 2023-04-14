@@ -269,7 +269,12 @@ export default function HomeScreen({ navigation }) {
         <TouchableOpacity
           style={[styles.newTaskBtn]}
           onPress={() =>
-            navigation.navigate("Task", { setData, data, itemInfo: {} })
+            navigation.navigate("Task", {
+              setData,
+              data,
+              itemInfo: {},
+              type: "NEW",
+            })
           }
         >
           <Text style={[styles.whiteText, styles.btnText]}>Create</Text>
