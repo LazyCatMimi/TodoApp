@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   Text,
   View,
@@ -12,6 +12,7 @@ import { Button, Input, CheckBox } from "react-native-elements";
 import Constants from "expo-constants";
 import { IoFilter, IoTrashOutline } from "react-icons/io5";
 import RadioGroup from "react-native-radio-buttons-group";
+import RadioForm from "react-native-simple-radio-button";
 import { styles } from "../App";
 
 export default function HomeScreen({ navigation }) {
@@ -19,36 +20,44 @@ export default function HomeScreen({ navigation }) {
     {
       title: "1. Log in",
       description: "made an account and logged in",
+      date: "4/11/23",
       completed: true,
       key: "t1",
     },
     {
       title: "2. Get Started",
       description: "begin your task-managing journey",
+      date: "4/12/23",
       completed: false,
       key: "t2",
     },
     {
       title: "3. description is optional",
       description: "",
-      completed: true,
+      date: "",
+      completed: false,
       key: "t3",
     },
   ];
   const radioButtonsData = [
     {
-      id: "1",
-      label: "Apple",
-      value: "apple",
+      label: "A↑",
+      value: "aAsc",
     },
     {
-      id: "2",
-      label: "Samsung",
-      value: "samsung",
+      label: "A↓",
+      value: "aDesc",
+    },
+    {
+      label: "Date↑",
+      value: "dateAsc",
+    },
+    {
+      label: "Date↓",
+      value: "dateDesc",
     },
   ];
   let [data, setData] = useState(initData);
-
   let [taskName, setTaskName] = useState("");
   let [taskDesc, setTaskDesc] = useState("");
   let [showSettings, setShowSettings] = useState(false);
@@ -66,6 +75,29 @@ export default function HomeScreen({ navigation }) {
       setData([newTask, ...data]);
     }
   };
+
+  // function to sort
+  useEffect(() => {
+    let copy = [...data];
+    let sortedData;
+    switch (sortType) {
+      case "aDesc":
+        sortedData = copy.sort((a, b) => b.title.localeCompare(a.title));
+        break;
+      case "aAsc":
+        sortedData = copy.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case "dateDesc":
+        sortedData = copy.sort((a, b) => new Date(b.date) - new Date(a.date));
+        break;
+      case "dateAsc":
+        sortedData = copy.sort((a, b) => new Date(a.date) - new Date(b.date));
+        break;
+      default:
+        sortedData = data;
+    }
+    setData(sortedData);
+  }, [sortType]);
 
   const renderItem = ({ item }) => {
     // console.log(item.key)
@@ -85,7 +117,7 @@ export default function HomeScreen({ navigation }) {
           {/* checkbox */}
           <CheckBox
             checked={item.completed}
-            style={[{ marginRight: 30 }]}
+            style={[{ padding: 0, margin: 0, marginRight: 30 }]}
             onPress={() => {
               let newData = [...data];
               newData[newData.indexOf(item)].completed = !item.completed;
@@ -104,11 +136,11 @@ export default function HomeScreen({ navigation }) {
             </Text>
             {
               // render description only if item has it
-              item.description.length > 0 ? (
+              item.description.length > 0 && (
                 <Text style={item.completed ? styles.crossText : undefined}>
                   {item.description}
                 </Text>
-              ) : undefined
+              )
             }
           </View>
         </View>
@@ -211,9 +243,17 @@ export default function HomeScreen({ navigation }) {
             <View style={{ alignItems: "center" }}>
               <View style={styles.sortContainer}>
                 {/* radio button for the sorting options */}
-                <RadioGroup
-                  radioButtons={radioButtonsData} //pass in our array
-                  onPress={(value) => setValue(value)}
+                <RadioForm
+                  radio_props={radioButtonsData}
+                  buttonColor={"white"}
+                  labelColor={"white"}
+                  selectedButtonColor={"white"}
+                  selectedLabelColor={"white"}
+                  buttonSize={15}
+                  initial={0}
+                  onPress={(value) => {
+                    setSortType(value);
+                  }}
                 />
                 {/* button to delete completed tasks */}
                 <TouchableOpacity
@@ -228,12 +268,12 @@ export default function HomeScreen({ navigation }) {
           )}
           <FlatList data={data} renderItem={renderItem} scrollEnabled={false} />
         </ScrollView>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={[styles.newTaskBtn]}
           onPress={() => navigation.navigate("Task")}
         >
           <Text style={[styles.whiteText, styles.btnText]}>Create</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </SafeAreaView>
     </>
   );
