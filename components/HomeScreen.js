@@ -63,19 +63,24 @@ export default function HomeScreen({ navigation }) {
   let [showSettings, setShowSettings] = useState(false);
   let [showConfirmation, setShowConfirmation] = useState(false);
   let [sortType, setSortType] = useState("aAsc");
-  let userData;
+  let [user, setUser] = useState("");
   useEffect(() => {
     async function getData() {
-      let data;
-      data = await AsyncStorage.getItem("@user");
-      if (data != null) {
-        return JSON.parse(data);
+      let userInfo;
+      userInfo = await AsyncStorage.getItem("@user");
+      if (userInfo != null) {
+        return JSON.parse(userInfo);
       } else {
         console.log("no user data");
         return null;
       }
     }
-    userData = getData();
+
+    async function setUserState() {
+      const userData = await getData();
+      setUser(userData);
+    }
+    setUserState();
   }, []);
 
   // function to sort
@@ -211,10 +216,7 @@ export default function HomeScreen({ navigation }) {
         {/* user info top bar */}
         <View style={[styles.topBar, styles.greeting]}>
           <Text style={styles.whiteText}>
-            Hello,{" "}
-            {userData != null
-              ? `${userData.firstName} ${userData.lastName}`
-              : "Multitasker"}
+            Hello, {user ? `${user.firstName} ${user.lastName}` : "Multitasker"}
           </Text>
           <TouchableOpacity onPress={() => navigation.navigate("Login")}>
             <FiLogOut size={22} />

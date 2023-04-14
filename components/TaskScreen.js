@@ -1,15 +1,6 @@
 // this file will be used later
 import { useState, useEffect } from "react";
-import {
-  CheckBox,
-  Text,
-  View,
-  StyleSheet,
-  SafeAreaView,
-  TouchableOpacity,
-  FlatList,
-  Image,
-} from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 // import self created stuff
 import { styles } from "../App";
 import { Input } from "react-native-elements";
