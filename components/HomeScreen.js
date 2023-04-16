@@ -64,23 +64,18 @@ export default function HomeScreen({ navigation }) {
   let [showConfirmation, setShowConfirmation] = useState(false);
   let [sortType, setSortType] = useState("aAsc");
   let [user, setUser] = useState("");
+
+  // get data such as user and tasks from local storage
   useEffect(() => {
-    async function getData() {
-      let userInfo;
-      userInfo = await AsyncStorage.getItem("@user");
+    async function getUserData() {
+      let userInfo = await AsyncStorage.getItem("@user");
       if (userInfo != null) {
-        return JSON.parse(userInfo);
+        setUser( JSON.parse(userInfo));
       } else {
         console.log("no user data");
-        return null;
       }
     }
-
-    async function setUserState() {
-      const userData = await getData();
-      setUser(userData);
-    }
-    setUserState();
+    getUserData()
   }, []);
 
   // function to sort
