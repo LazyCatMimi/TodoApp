@@ -5,6 +5,7 @@ import { Text, View, TouchableOpacity } from "react-native";
 import { styles } from "../App";
 import { Input } from "react-native-elements";
 import { IoIosArrowBack } from "react-icons/io";
+import { BsCalendar } from "react-icons/bs";
 import PopUp from "./popUpBox";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -163,6 +164,7 @@ export default function TaskScreen({ route, navigation }) {
             onBlur={validateDate}
             onFocus={() => setDisableSubmit(true)}
             errorMessage={err}
+            leftIcon={<BsCalendar color="#676477" style={{ marginRight: 5 }} />}
           />
           {/* submit button, only enables if task name contains something && date is valid */}
           <View style={{ alignItems: "center" }}>

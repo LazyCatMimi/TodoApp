@@ -11,6 +11,7 @@ import {
 import { CheckBox } from "react-native-elements";
 import RadioForm from "react-native-simple-radio-button";
 import { IoFilter, IoTrashOutline, IoAddOutline } from "react-icons/io5";
+import { BsCalendar } from "react-icons/bs";
 import { FiEdit3, FiLogOut } from "react-icons/fi";
 import { styles } from "../App";
 import PopUp from "./popUpBox";
@@ -187,14 +188,19 @@ export default function HomeScreen({ navigation }) {
               )
             }
             {item.date.length > 0 && (
-              <Text
-                style={[
-                  item.completed && styles.crossText,
-                  { color: "#676477" },
-                ]}
-              >
-                {item.date}
-              </Text>
+              <>
+                <View style={styles.row}>
+                  <BsCalendar color="#676477" style={{ marginRight: 5 }} />
+                  <Text
+                    style={[
+                      item.completed && styles.crossText,
+                      { color: "#676477" },
+                    ]}
+                  >
+                    {item.date}
+                  </Text>
+                </View>
+              </>
             )}
           </View>
         </View>

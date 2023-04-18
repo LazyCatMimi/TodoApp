@@ -92,6 +92,11 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  row: {
+    alignItems: "center",
+
+    flexDirection: "row",
+  },
   // texts
   whiteText: {
     color: "#FFFFFF",
