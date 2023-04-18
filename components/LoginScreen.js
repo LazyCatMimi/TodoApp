@@ -4,8 +4,10 @@ import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { Input } from "react-native-elements";
 import { styles } from "../App";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useIsFocused } from "@react-navigation/native";
 
 export default function LoginScreen({ navigation }) {
+  const isFocused = useIsFocused();
   let [username, setUsername] = useState("");
   let [password, setPassword] = useState("");
   let [err, setErr] = useState("");
@@ -15,12 +17,13 @@ export default function LoginScreen({ navigation }) {
       const data = await AsyncStorage.getItem("@user");
       if (data != null) {
         setUser(JSON.parse(data));
+        console.log(data);
       } else {
         console.log("no user data");
       }
     }
     getData();
-  }, []);
+  }, [isFocused]);
 
   const verify = () => {
     if (user.username == username && user.password == password) {

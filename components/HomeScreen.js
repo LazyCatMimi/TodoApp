@@ -74,7 +74,7 @@ export default function HomeScreen({ navigation }) {
         if (userInfo) {
           setUser(JSON.parse(userInfo));
           const taskList = JSON.parse(userInfo).tasks;
-          taskList && setData(taskList);
+          taskList.length != 0 && setData(taskList);
         }
       } catch (err) {
         console.error(err);
