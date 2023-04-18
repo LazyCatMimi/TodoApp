@@ -17,7 +17,6 @@ export default function LoginScreen({ navigation }) {
       const data = await AsyncStorage.getItem("@user");
       if (data != null) {
         setUser(JSON.parse(data));
-        console.log(data);
       } else {
         console.log("no user data");
       }
