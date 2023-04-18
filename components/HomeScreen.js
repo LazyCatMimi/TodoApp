@@ -8,13 +8,14 @@ import {
   FlatList,
   ScrollView,
 } from "react-native";
-import { Input, CheckBox } from "react-native-elements";
+import { CheckBox } from "react-native-elements";
 import RadioForm from "react-native-simple-radio-button";
 import { IoFilter, IoTrashOutline, IoAddOutline } from "react-icons/io5";
 import { FiEdit3, FiLogOut } from "react-icons/fi";
 import { styles } from "../App";
 import PopUp from "./popUpBox";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useIsFocused } from "@react-navigation/native";
 
 export default function HomeScreen({ navigation }) {
   let initData = [
@@ -58,7 +59,7 @@ export default function HomeScreen({ navigation }) {
       value: "dateDesc",
     },
   ];
-
+  const isFocused = useIsFocused();
   let [data, setData] = useState(initData);
   let [showSettings, setShowSettings] = useState(false);
   let [showConfirmation, setShowConfirmation] = useState(false);
@@ -68,15 +69,19 @@ export default function HomeScreen({ navigation }) {
   // get data such as user and tasks from local storage
   useEffect(() => {
     async function getUserData() {
-      let userInfo = await AsyncStorage.getItem("@user");
-      if (userInfo != null) {
-        setUser( JSON.parse(userInfo));
-      } else {
-        console.log("no user data");
+      try {
+        let userInfo = await AsyncStorage.getItem("@user");
+        if (userInfo) {
+          setUser(JSON.parse(userInfo));
+          const taskList = JSON.parse(userInfo).tasks;
+          taskList && setData(taskList);
+        }
+      } catch (err) {
+        console.error(err);
       }
     }
-    getUserData()
-  }, []);
+    getUserData();
+  }, [isFocused]);
 
   // function to sort
   useEffect(() => {
@@ -188,6 +193,7 @@ export default function HomeScreen({ navigation }) {
               data,
               itemInfo: item,
               type: "EDIT",
+              user,
             })
           }
         >
@@ -280,6 +286,7 @@ export default function HomeScreen({ navigation }) {
                 data,
                 itemInfo: {},
                 type: "NEW",
+                user,
               })
             }
           >

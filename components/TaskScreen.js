@@ -6,9 +6,10 @@ import { styles } from "../App";
 import { Input } from "react-native-elements";
 import { IoIosArrowBack } from "react-icons/io";
 import PopUp from "./popUpBox";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function TaskScreen({ route, navigation }) {
-  const { setData, data, itemInfo, type } = route.params;
+  const { setData, data, itemInfo, type, user } = route.params;
   let [taskName, setTaskName] = useState(type === "EDIT" ? itemInfo.title : "");
   let [taskDesc, setTaskDesc] = useState(
     type === "EDIT" ? itemInfo.description : ""
@@ -29,7 +30,7 @@ export default function TaskScreen({ route, navigation }) {
     return `t${highest + 1}`;
   };
 
-  const addNewTask = () => {
+  const addNewTask = async () => {
     const newTask = {
       title: taskName,
       description: taskDesc,
@@ -37,8 +38,15 @@ export default function TaskScreen({ route, navigation }) {
       completed: false,
       key: generateKey(),
     };
-    setData([...data, newTask]);
-
+    // setData([...data, newTask]);
+    try {
+      const dataCpy = [...data];
+      dataCpy.push(newTask);
+      const userCpy = { ...user, tasks: dataCpy };
+      await AsyncStorage.setItem("@user", JSON.stringify(userCpy));
+    } catch (err) {
+      console.error(err);
+    }
     navigation.navigate("Home");
   };
   const removeTask = () => {

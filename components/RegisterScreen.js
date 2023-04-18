@@ -27,20 +27,23 @@ export default function RegisterScreen({ navigation }) {
   let [zipErr, setZipErr] = useState("");
 
   let [register, setRegister] = useState(true);
-
-  if (!register) {
-    const newUser = {
-      firstName: firstName,
-      lastName: lastName,
-      username: username,
-      phoneNumber: phoneNumber,
-      password: password,
-      email: email,
-      zip: zip,
-      newsletter: newsletter,
-    };
-    AsyncStorage.setItem("@user", JSON.stringify(newUser));
-  }
+  const registerFunc = async () => {
+    if (!register) {
+      const newUser = {
+        firstName: firstName,
+        lastName: lastName,
+        username: username,
+        phoneNumber: phoneNumber,
+        password: password,
+        email: email,
+        zip: zip,
+        newsletter: newsletter,
+        tasks: [],
+      };
+      await AsyncStorage.setItem("@user", JSON.stringify(newUser));
+    }
+    navigation.navigate("Login");
+  };
 
   const updateButton = () => {
     const errorArray = [
@@ -265,7 +268,7 @@ export default function RegisterScreen({ navigation }) {
           ]}
           testID="login-register"
           disabled={register}
-          onPress={() => navigation.navigate("Login")}
+          onPress={registerFunc}
         >
           <Text style={[styles.whiteText, { width: "4em" }]}>Register</Text>
         </TouchableOpacity>
