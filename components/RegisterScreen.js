@@ -141,7 +141,7 @@ export default function RegisterScreen({ navigation }) {
         style={{
           justifyContent: "center",
           alignItems: "center",
-          padding: "20%",
+          padding: "10%",
         }}
       >
         <Text style={styles.appTitle}>MooTODO</Text>

@@ -39,10 +39,10 @@ export default function LoginScreen({ navigation }) {
         style={{
           justifyContent: "center",
           alignItems: "center",
-          padding: "20%",
+          padding: "10%",
         }}
       >
-        <Text style={styles.appTitle}>MooTODO</Text>
+        <Text style={[styles.appTitle]}>MooTODO</Text>
       </View>
 
       <View style={[styles.login, { flex: 1 }]}>

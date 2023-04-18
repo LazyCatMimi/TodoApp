@@ -167,7 +167,9 @@ export default function HomeScreen({ navigation }) {
                 item.completed ? styles.crossText : undefined,
               ]}
             >
-              {item.title}
+              {item.title.length > 28
+                ? item.title.slice(0, 28) + "..."
+                : item.title}
             </Text>
             {
               // render description only if item has it
@@ -178,7 +180,9 @@ export default function HomeScreen({ navigation }) {
                     { color: "#676477" },
                   ]}
                 >
-                  {item.description}
+                  {item.description.length > 46
+                    ? item.description.slice(0, 46) + "..."
+                    : item.description}
                 </Text>
               )
             }
