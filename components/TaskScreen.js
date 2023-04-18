@@ -9,7 +9,7 @@ import PopUp from "./popUpBox";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function TaskScreen({ route, navigation }) {
-  const { setData, data, itemInfo, type, user } = route.params;
+  const { data, itemInfo, type, user } = route.params;
   let [taskName, setTaskName] = useState(type === "EDIT" ? itemInfo.title : "");
   let [taskDesc, setTaskDesc] = useState(
     type === "EDIT" ? itemInfo.description : ""
@@ -38,23 +38,25 @@ export default function TaskScreen({ route, navigation }) {
       completed: false,
       key: generateKey(),
     };
-    // setData([...data, newTask]);
     try {
-      const dataCpy = [...data];
-      dataCpy.push(newTask);
-      const userCpy = { ...user, tasks: dataCpy };
+      const userCpy = { ...user, tasks: [...data, newTask] };
       await AsyncStorage.setItem("@user", JSON.stringify(userCpy));
     } catch (err) {
       console.error(err);
     }
     navigation.navigate("Home");
   };
-  const removeTask = () => {
+  const removeTask = async () => {
     const updatedData = data.filter((item) => item.key !== itemInfo.key);
-    setData(updatedData);
+    try {
+      const userCpy = { ...user, tasks: updatedData };
+      await AsyncStorage.setItem("@user", JSON.stringify(userCpy));
+    } catch (err) {
+      console.error(err);
+    }
     navigation.navigate("Home");
   };
-  const updateTask = () => {
+  const updateTask = async () => {
     const index = data.findIndex((item) => item.key === itemInfo.key);
     const updatedTask = {
       title: taskName,
@@ -65,7 +67,12 @@ export default function TaskScreen({ route, navigation }) {
     };
     const updatedData = [...data];
     updatedData[index] = { ...updatedData[index], ...updatedTask };
-    setData(updatedData);
+    try {
+      const userCpy = { ...user, tasks: updatedData };
+      await AsyncStorage.setItem("@user", JSON.stringify(userCpy));
+    } catch (err) {
+      console.error(err);
+    }
     navigation.navigate("Home");
   };
 
