@@ -83,6 +83,15 @@ export default function HomeScreen({ navigation }) {
     getUserData();
   }, [isFocused]);
 
+  // update storage whenever data is changed
+  useEffect(() => {
+    async function updateStorage() {
+      const userCpy = { ...user, tasks: [...data] };
+      await AsyncStorage.setItem("@user", JSON.stringify(userCpy));
+    }
+    updateStorage();
+  }, [data]);
+
   // function to sort
   useEffect(() => {
     let copy = [...data];
@@ -189,7 +198,6 @@ export default function HomeScreen({ navigation }) {
         <TouchableOpacity
           onPress={() =>
             navigation.navigate("Task", {
-              setData,
               data,
               itemInfo: item,
               type: "EDIT",
@@ -282,7 +290,6 @@ export default function HomeScreen({ navigation }) {
             style={[styles.newTaskBtn, styles.actionBtn]}
             onPress={() =>
               navigation.navigate("Task", {
-                setData,
                 data,
                 itemInfo: {},
                 type: "NEW",
