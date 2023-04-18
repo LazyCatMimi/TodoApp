@@ -12,8 +12,7 @@ export default function LoginScreen({ navigation }) {
   let [user, setUser] = useState("");
   useEffect(() => {
     async function getData() {
-      let data;
-      data = await AsyncStorage.getItem("@user");
+      const data = await AsyncStorage.getItem("@user");
       if (data != null) {
         setUser(JSON.parse(data));
       } else {
