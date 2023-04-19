@@ -46,9 +46,7 @@ export default function LoginScreen({ navigation }) {
       </View>
 
       <View style={[styles.login, { flex: 1 }]}>
-        <Text
-          style={[styles.sectionTitle, { color: "black", marginTop: "3em" }]}
-        >
+        <Text style={[styles.sectionTitle, { color: "black", marginTop: 40 }]}>
           Login
         </Text>
         <Input
@@ -74,7 +72,7 @@ export default function LoginScreen({ navigation }) {
           errorMessage={"noti"}
           onPress={verify}
         >
-          <Text style={[styles.whiteText, { width: "4em" }]}>login</Text>
+          <Text style={[styles.whiteText]}>login</Text>
         </TouchableOpacity>
 
         <Text

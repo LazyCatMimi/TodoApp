@@ -1,9 +1,16 @@
 import * as React from "react";
 import { useState, useCallback } from "react";
-import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Input, CheckBox } from "react-native-elements";
 import { styles } from "../App";
+// import { ScrollView } from "react-native-web";
 
 export default function RegisterScreen({ navigation }) {
   // states for each field value
@@ -136,150 +143,152 @@ export default function RegisterScreen({ navigation }) {
     }
   };
   return (
-    <View style={styles.container}>
-      <View
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          padding: "10%",
-        }}
-      >
-        <Text style={styles.appTitle}>MooTODO</Text>
+    <ScrollView>
+      <View style={styles.container}>
+        <View
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "10%",
+          }}
+        >
+          <Text style={styles.appTitle}>MooTODO</Text>
+        </View>
+
+        <View style={styles.login}>
+          <Text
+            style={[styles.sectionTitle, { color: "black", marginTop: 40 }]}
+          >
+            Register
+          </Text>
+          <Text style={{ marginTop: 30 }}>Personal information</Text>
+          <Input
+            label="First Name"
+            testID="firstname"
+            inputContainerStyle={[loginStyles.field]}
+            onChangeText={(value) => {
+              setFirstName(value);
+              validate("fname", value);
+            }}
+            errorMessage={firstNameErr}
+            onBlur={updateButton}
+          ></Input>
+
+          <Input
+            label="Last Name"
+            testID="lastname"
+            inputContainerStyle={loginStyles.field}
+            onChangeText={(value) => {
+              setLastName(value);
+              validate("lname", value);
+            }}
+            errorMessage={lastNameErr}
+            onBlur={updateButton}
+          ></Input>
+
+          <Input
+            label="Phone Number"
+            testID="phonenumber"
+            placeholder="(xxx) xxx-xxxx"
+            inputContainerStyle={loginStyles.field}
+            onChangeText={(value) => {
+              setPhoneNumber(value);
+              validate("phone", value);
+            }}
+            errorMessage={phoneErr}
+            onBlur={updateButton}
+          ></Input>
+
+          <Input
+            label="Email"
+            testID="email"
+            inputContainerStyle={loginStyles.field}
+            onChangeText={(value) => {
+              setEmail(value);
+              validate("email", value);
+            }}
+            errorMessage={emailErr}
+            onBlur={updateButton}
+          ></Input>
+
+          <Input
+            label="ZIP Code"
+            testID="zip"
+            inputContainerStyle={loginStyles.field}
+            onChangeText={(value) => {
+              setZip(value);
+              validate("zip", value);
+            }}
+            errorMessage={zipErr}
+            onBlur={updateButton}
+          ></Input>
+
+          <Text style={{ marginTop: 30 }}>Login information</Text>
+          <Input
+            label="Username"
+            testID="username"
+            inputContainerStyle={loginStyles.field}
+            onChangeText={(value) => {
+              setUsername(value);
+              validate("username", value);
+            }}
+            onBlur={updateButton}
+          ></Input>
+
+          <Input
+            label="Password"
+            testID="password"
+            inputContainerStyle={loginStyles.field}
+            onChangeText={(value) => {
+              setPassword(value);
+              validate("password", value);
+            }}
+            secureTextEntry={true}
+            errorMessage={passwordErr}
+            onBlur={updateButton}
+          ></Input>
+
+          <Input
+            label="Confirm Password"
+            testID="confirmpassword"
+            inputContainerStyle={loginStyles.field}
+            onChangeText={(value) => {
+              setConfirmPassword(value);
+              validate("confirmPassword", value);
+            }}
+            secureTextEntry={true}
+            errorMessage={confirmPassErr}
+            onBlur={updateButton}
+          ></Input>
+
+          <CheckBox
+            title="Sign up for Newsletter"
+            label="Newsletter"
+            testID="newsletter"
+            checked={newsletter}
+            onPress={() => setNewsletter(!newsletter)}
+          ></CheckBox>
+
+          <TouchableOpacity
+            style={[
+              loginStyles.button,
+              register ? { opacity: 0.2 } : { opacity: 1 },
+            ]}
+            testID="login-register"
+            disabled={register}
+            onPress={registerFunc}
+          >
+            <Text style={[styles.whiteText, { width: 40 }]}>Register</Text>
+          </TouchableOpacity>
+          <Text
+            onPress={() => navigation.navigate("Login")}
+            style={{ fontWeight: "bold" }}
+          >
+            or <Text style={{ color: "#4d8bff" }}>login</Text>
+          </Text>
+        </View>
       </View>
-
-      <View style={styles.login}>
-        <Text
-          style={[styles.sectionTitle, { color: "black", marginTop: "3em" }]}
-        >
-          Register
-        </Text>
-        <Text style={{ marginTop: 30 }}>Personal information</Text>
-        <Input
-          label="First Name"
-          testID="firstname"
-          inputContainerStyle={[loginStyles.field]}
-          onChangeText={(value) => {
-            setFirstName(value);
-            validate("fname", value);
-          }}
-          errorMessage={firstNameErr}
-          onBlur={updateButton}
-        ></Input>
-
-        <Input
-          label="Last Name"
-          testID="lastname"
-          inputContainerStyle={loginStyles.field}
-          onChangeText={(value) => {
-            setLastName(value);
-            validate("lname", value);
-          }}
-          errorMessage={lastNameErr}
-          onBlur={updateButton}
-        ></Input>
-
-        <Input
-          label="Phone Number"
-          testID="phonenumber"
-          placeholder="(xxx) xxx-xxxx"
-          inputContainerStyle={loginStyles.field}
-          onChangeText={(value) => {
-            setPhoneNumber(value);
-            validate("phone", value);
-          }}
-          errorMessage={phoneErr}
-          onBlur={updateButton}
-        ></Input>
-
-        <Input
-          label="Email"
-          testID="email"
-          inputContainerStyle={loginStyles.field}
-          onChangeText={(value) => {
-            setEmail(value);
-            validate("email", value);
-          }}
-          errorMessage={emailErr}
-          onBlur={updateButton}
-        ></Input>
-
-        <Input
-          label="ZIP Code"
-          testID="zip"
-          inputContainerStyle={loginStyles.field}
-          onChangeText={(value) => {
-            setZip(value);
-            validate("zip", value);
-          }}
-          errorMessage={zipErr}
-          onBlur={updateButton}
-        ></Input>
-
-        <Text style={{ marginTop: 30 }}>Login information</Text>
-        <Input
-          label="Username"
-          testID="username"
-          inputContainerStyle={loginStyles.field}
-          onChangeText={(value) => {
-            setUsername(value);
-            validate("username", value);
-          }}
-          onBlur={updateButton}
-        ></Input>
-
-        <Input
-          label="Password"
-          testID="password"
-          inputContainerStyle={loginStyles.field}
-          onChangeText={(value) => {
-            setPassword(value);
-            validate("password", value);
-          }}
-          secureTextEntry={true}
-          errorMessage={passwordErr}
-          onBlur={updateButton}
-        ></Input>
-
-        <Input
-          label="Confirm Password"
-          testID="confirmpassword"
-          inputContainerStyle={loginStyles.field}
-          onChangeText={(value) => {
-            setConfirmPassword(value);
-            validate("confirmPassword", value);
-          }}
-          secureTextEntry={true}
-          errorMessage={confirmPassErr}
-          onBlur={updateButton}
-        ></Input>
-
-        <CheckBox
-          title="Sign up for Newsletter"
-          label="Newsletter"
-          testID="newsletter"
-          checked={newsletter}
-          onPress={() => setNewsletter(!newsletter)}
-        ></CheckBox>
-
-        <TouchableOpacity
-          style={[
-            loginStyles.button,
-            register ? { opacity: 0.2 } : { opacity: 1 },
-          ]}
-          testID="login-register"
-          disabled={register}
-          onPress={registerFunc}
-        >
-          <Text style={[styles.whiteText, { width: "4em" }]}>Register</Text>
-        </TouchableOpacity>
-        <Text
-          onPress={() => navigation.navigate("Login")}
-          style={{ fontWeight: "bold" }}
-        >
-          or <Text style={{ color: "#4d8bff" }}>login</Text>
-        </Text>
-      </View>
-    </View>
+    </ScrollView>
   );
 }
 
