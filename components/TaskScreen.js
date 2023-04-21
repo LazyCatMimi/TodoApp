@@ -86,9 +86,6 @@ export default function TaskScreen({ route, navigation }) {
     } else if (isNaN(Date.parse(taskDate))) {
       setErr(`${taskDate} is not a valid date.`);
     } else {
-      if (disableSubmit) {
-        setDisableSubmit(false);
-      }
       setErr("");
     }
   };
