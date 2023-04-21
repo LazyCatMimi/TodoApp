@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.js": "/TodoApp/static/js/main.f1d7ab5c.js",
+    "static/js/273.64c87ca3.js": "/TodoApp/static/js/273.64c87ca3.js",
+    "static/media/MaterialCommunityIcons.ttf": "/TodoApp/static/media/MaterialCommunityIcons.5d42b4e60858731e7b65.ttf",
+    "static/media/Fontisto.ttf": "/TodoApp/static/media/Fontisto.c0edd68811e0237502fe.ttf",
+    "static/media/Ionicons.ttf": "/TodoApp/static/media/Ionicons.3517aeaa34b2f8cd8eef.ttf",
+    "static/media/MaterialIcons.ttf": "/TodoApp/static/media/MaterialIcons.120b4c7bbd155bd0a04d.ttf",
+    "static/media/FontAwesome5_Solid.ttf": "/TodoApp/static/media/FontAwesome5_Solid.07c3313b24f7b1ca85ee.ttf",
+    "static/media/FontAwesome.ttf": "/TodoApp/static/media/FontAwesome.1e59d2330b4c6deb84b3.ttf",
+    "static/media/FontAwesome5_Brands.ttf": "/TodoApp/static/media/FontAwesome5_Brands.9e138496e8f1719c6ebf.ttf",
+    "static/media/AntDesign.ttf": "/TodoApp/static/media/AntDesign.163adab9dbd7cb1ed12a.ttf",
+    "static/media/Entypo.ttf": "/TodoApp/static/media/Entypo.fc6169344c041cffcdae.ttf",
+    "static/media/Foundation.ttf": "/TodoApp/static/media/Foundation.c0cbb004854f9c746f89.ttf",
+    "static/media/Feather.ttf": "/TodoApp/static/media/Feather.0f5d9cede2e831f3fc80.ttf",
+    "static/media/SimpleLineIcons.ttf": "/TodoApp/static/media/SimpleLineIcons.3ec13a24af3fdda11107.ttf",
+    "static/media/Octicons.ttf": "/TodoApp/static/media/Octicons.6b742a230954dc640ba2.ttf",
+    "static/media/FontAwesome5_Regular.ttf": "/TodoApp/static/media/FontAwesome5_Regular.1017bce89c72f95bcf8e.ttf",
+    "static/media/Zocial.ttf": "/TodoApp/static/media/Zocial.07fea2ac49bcc67d9a6b.ttf",
+    "favicon.ico": "/TodoApp/favicon.ico",
+    "static/media/EvilIcons.ttf": "/TodoApp/static/media/EvilIcons.699664b33ac2837d5bee.ttf",
+    "index.html": "/TodoApp/index.html",
+    "static/media/rocket.png": "/TodoApp/static/media/rocket.d2f3bf41d5e4515c39a9.png",
+    "static/media/bell.png": "/TodoApp/static/media/bell.cf04af27d6a651c4b904.png",
+    "favicon-32.png": "/TodoApp/favicon-32.png",
+    "static/media/star.png": "/TodoApp/static/media/star.69c7138684828d68fe5a.png",
+    "static/media/heart.png": "/TodoApp/static/media/heart.23b5c2c0eb77d50ff1b4.png",
+    "favicon-16.png": "/TodoApp/favicon-16.png",
+    "manifest.json": "/TodoApp/manifest.json",
+    "serve.json": "/TodoApp/serve.json",
+    "main.f1d7ab5c.js.map": "/TodoApp/static/js/main.f1d7ab5c.js.map",
+    "273.64c87ca3.js.map": "/TodoApp/static/js/273.64c87ca3.js.map"
+  },
+  "entrypoints": [
+    "static/js/273.64c87ca3.js",
+    "static/js/main.f1d7ab5c.js"
+  ]
+}
