@@ -1,6 +1,8 @@
 # Todo App
 
 See on GitHub pages
+https://lazycatmimi.github.io/TodoApp/
+
 A Todo app using **React Native**. This is a mobile application that helps users to manage their tasks.
 
 ## Features
