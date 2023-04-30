@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import { useState, useEffect } from "react";
 import Constants from "expo-constants";
 import { NavigationContainer } from "@react-navigation/native";
@@ -14,10 +14,25 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = React.useState(null);
+
+  useEffect(() => {
+    async function checkLoginStatus() {
+      const data = await AsyncStorage.getItem('@user');
+      if (data !== null) {
+        console.log("ran")
+        setIsAuthenticated(true);
+      }else{
+        setIsAuthenticated(false)
+      }
+    }
+    checkLoginStatus();
+  }, []);
   return (
+    isAuthenticated !== null ?
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={"Login"}
+        initialRouteName={isAuthenticated ? "Home" : "Login"}
         screenOptions={{
           headerShown: false,
         }}
@@ -28,7 +43,9 @@ export default function App() {
         <Stack.Screen name="Task" component={TaskScreen} />
       </Stack.Navigator>
     </NavigationContainer>
-  );
+  : <Text>Loading</Text>
+  )
+  
 }
 
 const mainPAD = "5%";
